@@ -1,10 +1,15 @@
-import { Box, Button, SimpleGrid, Text } from "@chakra-ui/react";
+import { SimpleGrid, Spinner, Text } from "@chakra-ui/react";
+import React from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { GameQuery } from "../App";
 import useGames from "../hooks/useGames";
 import GameCard from "./GameCard";
 import GameCardContainer from "./GameCardContainer";
 import GameCardSkeleton from "./GameCardSkeleton";
-import { GameQuery } from "../App";
-import React from "react";
+
+// instal React Infinit Scroll: npm i react-infinite-scroll-component@6.1
+// in the GameGrid component, wrat the SimpleGrid inside an InfiniteScroll component
+// create a constant to store the fetchedGamesCount
 
 interface Props {
 	gameQuery: GameQuery;
@@ -23,9 +28,23 @@ const GameGrid = ({ gameQuery }: Props) => {
 
 	if (error) return <Text>{error.message}</Text>;
 
+	const fetchedGamesCount =
+		data?.pages.reduce((total, page) => total + page.results.length, 0) || 0;
+
 	return (
-		<Box padding="10px">
-			<SimpleGrid columns={{ sm: 1, md: 2, lg: 3, xl: 4 }} spacing={6}>
+		<InfiniteScroll
+			dataLength={fetchedGamesCount}
+			hasMore={!!hasNextPage}
+			next={() => fetchNextPage()}
+			loader={<Spinner />}
+		>
+			{/* // Double exclamations convert this to an actual boolean value. So, undefined is converted to false*/}
+
+			<SimpleGrid
+				columns={{ sm: 1, md: 2, lg: 3, xl: 4 }}
+				spacing={6}
+				padding="10px"
+			>
 				{isLoading &&
 					skeletons.map((skeleton) => (
 						<GameCardContainer key={skeleton}>
@@ -42,12 +61,7 @@ const GameGrid = ({ gameQuery }: Props) => {
 					</React.Fragment>
 				))}
 			</SimpleGrid>
-			{hasNextPage && (
-				<Button onClick={() => fetchNextPage()} marginY={5}>
-					{isFetchingNextPage ? "Loading..." : "Load More"}
-				</Button>
-			)}
-		</Box>
+		</InfiniteScroll>
 	);
 };
 
