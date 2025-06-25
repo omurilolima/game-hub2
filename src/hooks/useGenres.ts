@@ -1,6 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
+import ms from "ms";
 import genres from "../data/genres";
 import APIClient from "../services/api-client";
+
+// install MS for calculating time: npm i ms@2.1.3
+// install the type declaration for MS: npm i -D @types/ms
 
 const apiClient = new APIClient<Genre>("/genres");
 
@@ -14,7 +18,7 @@ const useGenres = () =>
 	useQuery({
 		queryKey: ["genres"],
 		queryFn: apiClient.getAll,
-		staleTime: 24 * 60 * 60 * 1000, // 24h
+		staleTime: ms("24"),
 		initialData: genres,
 	});
 
