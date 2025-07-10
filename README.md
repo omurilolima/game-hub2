@@ -2,8 +2,12 @@
 
 ## Installing
 
-Install [Chakra-ui](https://v2.chakra-ui.com/getting-started/vite-guide)
-Install react-icons@4.7.1
+- Install [Chakra-ui](https://v2.chakra-ui.com/getting-started/vite-guide)
+- Install `npm i react-icons@4.7.1`
+- React Infinit Scroll: `npm i react-infinite-scroll-component@6.1`
+- Zustand for Managing Application State: `npm i zustand@4.3.7`
+- Zustand DevTools for inspecting stores: `npm i simple-zustand-devtools@1.1.0`
+- Type declaration for node: `npm i -D @types/node`
 
 ## Tools
 
