@@ -8,6 +8,7 @@
 - Zustand for Managing Application State: `npm i zustand@4.3.7`
 - Zustand DevTools for inspecting stores: `npm i simple-zustand-devtools@1.1.0`
 - Type declaration for node: `npm i -D @types/node`
+- React Rounter: `npm i react-router-dom@6.10.0`
 
 ## Tools
 
@@ -32,6 +33,7 @@ Visit the [live site](https://game-hub-nine-pied.vercel.app/)
 - Ordering the games and search results
 - Loading skeletons
 - Dinamic heading
+- Error Page
 
 ## Design interface:
 
